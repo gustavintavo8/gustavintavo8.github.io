@@ -3,9 +3,6 @@
 > **Ingeniería Informática en Tecnologías de la Información** - Universidad de Oviedo (EPI Gijón).
 > Portfolio personal desarrollado con React, TailwindCSS y Motion UI.
 
-![Portfolio Preview](public/screenshot.png)
-*(Si no tienes captura aún, borra esta línea o sube una imagen a la carpeta public)*
-
 ## ⚡ Sobre el Proyecto
 
 Este repositorio contiene el código fuente de mi portfolio personal. Diseñado no solo para mostrar mis proyectos, sino para demostrar mis capacidades en **Ingeniería de Software Frontend**, arquitectura de componentes y consumo de APIs.
