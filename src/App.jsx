@@ -1,15 +1,13 @@
 import { useState, useEffect } from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
-import Lenis from '@studio-freight/lenis'
 import CustomCursor from './components/CustomCursor'
 import Layout from './components/Layout'
-import SEO from './components/SEO'
 import HeroSection from './sections/HeroSection'
-import AboutSection from './sections/AboutSection'
-import NowSection from './sections/NowSection'
-import TrayectoriaSection from './sections/TrayectoriaSection'
-import StackSection from './sections/StackSection'
-import ProjectsSection from './sections/ProjectsSection'
+import Home from './pages/Home'
+import BlogIndex from './pages/BlogIndex'
+import BlogPost from './pages/BlogPost'
+import Lenis from '@studio-freight/lenis'
 
 function App() {
   const [entered, setEntered] = useState(false)
@@ -36,25 +34,26 @@ function App() {
   }, [entered])
 
   return (
-    <div className="bg-ln-black min-h-screen text-white font-sans selection:bg-ln-neon selection:text-black">
-      <SEO />
-      {hasFinePointer && <CustomCursor />}
-      <div className="fixed inset-0 bg-[url('/noise.svg')] opacity-5 pointer-events-none z-50" />
+    <BrowserRouter>
+      <div className="bg-ln-black min-h-screen text-white font-sans selection:bg-ln-neon selection:text-black">
+        {hasFinePointer && <CustomCursor />}
+        <div className="fixed inset-0 bg-[url('/noise.svg')] opacity-5 pointer-events-none z-50" />
 
-      <AnimatePresence>
-        {!entered && <HeroSection onEnter={() => setEntered(true)} />}
-      </AnimatePresence>
+        <AnimatePresence>
+          {!entered && <HeroSection onEnter={() => setEntered(true)} />}
+        </AnimatePresence>
 
-      {entered && (
-        <Layout>
-          <AboutSection />
-          <NowSection />
-          <TrayectoriaSection />
-          <StackSection />
-          <ProjectsSection />
-        </Layout>
-      )}
-    </div>
+        {entered && (
+          <Layout>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/blog" element={<BlogIndex />} />
+              <Route path="/blog/:slug" element={<BlogPost />} />
+            </Routes>
+          </Layout>
+        )}
+      </div>
+    </BrowserRouter>
   )
 }
 
