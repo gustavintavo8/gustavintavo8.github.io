@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 
 export default function CustomCursor() {
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  const prefersReducedMotion = useReducedMotion()
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
 
   useEffect(() => {
@@ -10,7 +10,7 @@ export default function CustomCursor() {
     const mouseMove = (e) => setMousePosition({ x: e.clientX, y: e.clientY })
     window.addEventListener('mousemove', mouseMove)
     return () => window.removeEventListener('mousemove', mouseMove)
-  }, [])
+  }, [prefersReducedMotion])
 
   if (prefersReducedMotion) return null
 

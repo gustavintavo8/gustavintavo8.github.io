@@ -83,6 +83,7 @@ export default function ProjectCard({ project, index }) {
             href={project.demo}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label={`Ver demo de ${project.name}`}
             className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded bg-ln-neon text-black text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors duration-200"
           >
             <FiExternalLink size={12} /> Ver demo
@@ -91,6 +92,7 @@ export default function ProjectCard({ project, index }) {
             href={project.repo}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label={`Ver código de ${project.name} en GitHub`}
             className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded border border-white/20 text-gray-300 text-xs font-bold uppercase tracking-wider hover:border-ln-neon hover:text-ln-neon transition-colors duration-200"
           >
             <FiGithub size={12} /> Ver código
