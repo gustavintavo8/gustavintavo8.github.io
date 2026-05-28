@@ -7,12 +7,16 @@ import Lenis from '@studio-freight/lenis'
 // --- COMPONENTES AUXILIARES ---
 
 const CustomCursor = () => {
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   useEffect(() => {
+    if (prefersReducedMotion) return;
     const mouseMove = (e) => setMousePosition({ x: e.clientX, y: e.clientY });
     window.addEventListener("mousemove", mouseMove);
     return () => window.removeEventListener("mousemove", mouseMove);
-  }, []);
+  }, [prefersReducedMotion]);
+
+  if (prefersReducedMotion) return null;
 
   return (
     <>
@@ -35,7 +39,7 @@ const WelcomeScreen = ({ onEnter }) => {
         transition: { duration: 1, ease: [0.76, 0, 0.24, 1] },
       }}
     >
-      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.05]"></div>
+      <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-[0.05]"></div>
 
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
@@ -122,6 +126,7 @@ const ProjectCard = ({ repo, index, isHighlight }) => {
 function App() {
   const [entered, setEntered] = useState(false);
   const [repos, setRepos] = useState([]);
+  const [hasFinePointer] = useState(() => window.matchMedia('(pointer: fine)').matches);
 
   useEffect(() => {
     if (entered) {
@@ -133,31 +138,16 @@ function App() {
       requestAnimationFrame(raf);
     }
 
-    // Aquí mezclamos tus datos reales con el fetch de GitHub
-    const manualProjects = [
-      {
-        id: "highlight-1",
-        name: "AI World Cup Predictor 2026",
-        language: "Python / AI",
-        description:
-          "Modelo predictivo basado en Machine Learning para pronosticar resultados del Mundial 2026. Análisis de datasets históricos y estadísticas de jugadores.",
-        html_url: "#", // Si no tienes link, pon #
-        icon: <FaBrain size={24} />,
-      },
-    ];
-
     fetch(
       "https://api.github.com/users/gustavintavo8/repos?sort=updated&per_page=4"
     )
       .then((res) => res.json())
       .then((data) => {
-        // Combinamos el manual con los de la API
-        setRepos([...manualProjects, ...data]);
+        setRepos(data);
       })
       .catch(() => {
         // Fallback si falla la API
         setRepos([
-          ...manualProjects,
           {
             id: 1,
             name: "Data-Structures-CPP",
@@ -179,8 +169,8 @@ function App() {
 
   return (
     <div className="bg-ln-black min-h-screen text-white font-sans selection:bg-ln-neon selection:text-black">
-      <CustomCursor />
-      <div className="fixed inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-5 pointer-events-none z-50"></div>
+      {hasFinePointer && <CustomCursor />}
+      <div className="fixed inset-0 bg-[url('/noise.svg')] opacity-5 pointer-events-none z-50"></div>
 
       <AnimatePresence>
         {!entered && <WelcomeScreen onEnter={() => setEntered(true)} />}
@@ -404,7 +394,7 @@ function App() {
                       key={repo.id || i}
                       repo={repo}
                       index={i}
-                      isHighlight={repo.id === "highlight-1"} // Destacamos el de IA
+                      isHighlight={false}
                     />
                   ))
                 ) : (
@@ -444,7 +434,7 @@ function App() {
               </a>
             </div>
             <p className="text-gray-600 font-mono text-xs">
-              © 2025 Gustavo Sobrado Aller. <br />
+              © {new Date().getFullYear()} Gustavo Sobrado Aller. <br />
               Ingeniería Informática en Tecnologías de la Información.
             </p>
           </footer>

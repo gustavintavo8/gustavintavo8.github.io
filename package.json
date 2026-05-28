@@ -2,7 +2,7 @@
   "name": "portfolio-gustavo",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://gustavintavo8.github.io/portfolio-gustavo/",
+  "homepage": "https://gustavintavo8.github.io/",
   "type": "module",
   "scripts": {
     "dev": "vite",
