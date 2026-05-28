@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiGithub, FiArrowUpRight, FiMapPin, FiMail, FiLayers, FiTerminal, FiCode, FiExternalLink } from 'react-icons/fi';
+import { FiGithub, FiArrowUpRight, FiMapPin, FiMail, FiLayers, FiTerminal, FiCode, FiExternalLink, FiDownload, FiDatabase } from 'react-icons/fi';
 import { FaLinkedin, FaBrain } from 'react-icons/fa';
 import Lenis from '@studio-freight/lenis'
 import { projects } from './data/projects'
@@ -181,6 +181,11 @@ function App() {
   const [hasFinePointer] = useState(() => window.matchMedia('(pointer: fine)').matches);
 
   useEffect(() => {
+    const timer = setTimeout(() => setEntered(true), 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
     if (!entered) return;
     const lenis = new Lenis();
     let rafId;
@@ -286,11 +291,12 @@ function App() {
                       de memoria en C hasta la arquitectura de microservicios.
                     </p>
                     <p>
-                      Actualmente enfocado en el desarrollo{" "}
-                      <strong>Backend, IA</strong> y la{" "}
-                      <strong>Gestión Técnica de Proyectos</strong>. Busco ser
-                      el puente entre la necesidad del cliente y la solución
-                      tecnológica perfecta.
+                      Actualmente enfocado en{" "}
+                      <strong>APIs con IA</strong>{" "}
+                      (RAG, agentes, function calling) y aplicaciones{" "}
+                      <strong>full-stack</strong> con Python y Next.js. Busco
+                      proyectos donde la IA aporte valor real, no solo como
+                      hype.
                     </p>
                   </div>
 
@@ -322,7 +328,7 @@ function App() {
 
                   <div className="flex flex-wrap gap-6 mt-8 pt-8 border-t border-white/10 font-mono text-sm">
                     <div className="flex items-center gap-2 text-gray-300">
-                      <FiMapPin className="text-ln-neon" /> Gijón, España
+                      <FiMapPin className="text-ln-neon" /> Mieres, Asturias, España
                     </div>
                     <a
                       href="mailto:gustavintavo1202@gmail.com"
@@ -332,7 +338,82 @@ function App() {
                       gustavintavo1202@gmail.com
                     </a>
                   </div>
+                  <a
+                    href="/cv-gustavo-sobrado.pdf"
+                    download
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-ln-neon text-black font-bold uppercase text-sm tracking-wider rounded-full hover:bg-white transition-colors mt-4"
+                  >
+                    <FiDownload size={16} /> Descargar CV
+                  </a>
                 </motion.div>
+              </div>
+            </section>
+
+            {/* --- SECCIÓN: AHORA MISMO --- */}
+            <section id="now" className="mb-32">
+              <h3 className="text-sm font-mono text-gray-500 mb-8 uppercase tracking-widest border-b border-white/10 pb-2">
+                Ahora mismo
+              </h3>
+              <div className="grid md:grid-cols-2 gap-8">
+                <div className="space-y-4 text-gray-400 leading-relaxed border-l-2 border-ln-neon pl-6">
+                  <p><strong className="text-white">Trabajando en:</strong> LegalDev, mi API RAG de normativa legal. Migrando a Hugging Face Spaces y mejorando la cobertura de tests.</p>
+                  <p><strong className="text-white">Aprendiendo:</strong> Arquitecturas de agentes con LangGraph. TypeScript avanzado. Optimización de consultas PostgreSQL.</p>
+                  <p><strong className="text-white">Cursando:</strong> 4º de Ingeniería Informática en TI, Universidad de Oviedo. Trabajando el TFG.</p>
+                </div>
+                <div className="space-y-4 text-gray-400 leading-relaxed border-l-2 border-white/10 pl-6">
+                  <p><strong className="text-white">Enfocado en:</strong> Backend con Python y FastAPI, sistemas con IA (RAG, function calling), y aplicaciones full-stack con Next.js.</p>
+                  <p><strong className="text-white">Idiomas:</strong> Español (nativo) · Inglés (B2)</p>
+                  <p><strong className="text-white">Ubicación:</strong> Mieres, Asturias, España</p>
+                </div>
+              </div>
+            </section>
+
+            {/* --- SECCIÓN: TRAYECTORIA --- */}
+            <section id="trayectoria" className="mb-32">
+              <h3 className="text-sm font-mono text-gray-500 mb-8 uppercase tracking-widest border-b border-white/10 pb-2">
+                Trayectoria
+              </h3>
+              <div className="relative border-l-2 border-white/10 pl-8 space-y-10">
+                {[
+                  {
+                    year: "2026",
+                    title: "LegalDev",
+                    subtitle: "Proyecto personal · En producción",
+                    desc: "API RAG de normativa legal para developers. Python, FastAPI, ChromaDB, LangChain. 69 tests, 84% cobertura.",
+                  },
+                  {
+                    year: "2025",
+                    title: "PachagasApp",
+                    subtitle: "Proyecto personal · En producción",
+                    desc: "Plataforma full-stack para organizar partidos de fútbol. 31 usuarios reales. Next.js, Supabase, Vercel AI SDK.",
+                  },
+                  {
+                    year: "2025",
+                    title: "Matrícula de Honor",
+                    subtitle: "Universidad de Oviedo",
+                    desc: "Inteligencia de Negocio & IA. Máxima calificación.",
+                  },
+                  {
+                    year: "2020",
+                    title: "Inicio del Grado",
+                    subtitle: "Ingeniería Informática en TI · EPI Gijón",
+                    desc: "Universidad de Oviedo. Especialización en backend, sistemas y desarrollo de software.",
+                  },
+                ].map((item) => (
+                  <motion.div
+                    key={item.year + item.title}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    className="relative"
+                  >
+                    <div className="absolute -left-[2.85rem] top-1 w-4 h-4 rounded-full bg-ln-neon border-2 border-ln-black"></div>
+                    <div className="text-xs font-mono text-ln-neon mb-1">{item.year}</div>
+                    <h4 className="text-white font-bold text-lg">{item.title}</h4>
+                    <div className="text-gray-500 text-sm mb-2">{item.subtitle}</div>
+                    <p className="text-gray-400 text-sm leading-relaxed">{item.desc}</p>
+                  </motion.div>
+                ))}
               </div>
             </section>
 
@@ -342,60 +423,50 @@ function App() {
                 Technical Arsenal
               </h3>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {/* Lenguajes */}
-                <div>
-                  <h4 className="text-white font-bold mb-4 flex items-center gap-2">
-                    <FiCode className="text-ln-neon" /> Core Languages
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {["Java (Advanced)", "Python", "C++", "SQL"].map((t) => (
-                      <span
-                        key={t}
-                        className="bg-[#111] border border-white/10 px-3 py-1 rounded text-sm text-gray-300 hover:border-ln-neon transition"
-                      >
-                        {t}
-                      </span>
-                    ))}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {[
+                  {
+                    icon: <FiCode className="text-ln-neon" />,
+                    title: "Lenguajes",
+                    items: ["Python 3.11", "TypeScript", "Java", "SQL", "C++"],
+                  },
+                  {
+                    icon: <FiDatabase className="text-ln-neon" />,
+                    title: "Backend & Datos",
+                    items: ["FastAPI", "Next.js", "PostgreSQL", "Supabase", "ChromaDB", "Docker"],
+                  },
+                  {
+                    icon: <FaBrain className="text-ln-neon" />,
+                    title: "IA & LLMs",
+                    items: ["LangChain", "RAG", "Function calling", "Groq", "Vercel AI SDK"],
+                  },
+                  {
+                    icon: <FiLayers className="text-ln-neon" />,
+                    title: "Frontend",
+                    items: ["React 19", "Next.js", "Tailwind CSS", "Framer Motion"],
+                  },
+                  {
+                    icon: <FiTerminal className="text-ln-neon" />,
+                    title: "DevOps & Testing",
+                    items: ["Git", "Docker", "Playwright", "pytest", "Linux"],
+                  },
+                ].map((category) => (
+                  <div key={category.title}>
+                    <h4 className="text-white font-bold mb-4 flex items-center gap-2">
+                      {category.icon} {category.title}
+                    </h4>
+                    <div className="flex flex-wrap gap-2">
+                      {category.items.map((t) => (
+                        <span
+                          key={t}
+                          className="bg-[#111] border border-white/10 px-3 py-1 rounded text-sm text-gray-300 hover:border-ln-neon transition"
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </div>
-                {/* Sistemas */}
-                <div>
-                  <h4 className="text-white font-bold mb-4 flex items-center gap-2">
-                    <FiTerminal className="text-ln-neon" /> Systems & DevOps
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {["Linux", "Docker", "Git", "Bash Scripting"].map((t) => (
-                      <span
-                        key={t}
-                        className="bg-[#111] border border-white/10 px-3 py-1 rounded text-sm text-gray-300 hover:border-ln-neon transition"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                {/* Áreas de Interés */}
-                <div>
-                  <h4 className="text-white font-bold mb-4 flex items-center gap-2">
-                    <FiLayers className="text-ln-neon" /> Focus Areas
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {[
-                      "Backend Dev",
-                      "Fullstack",
-                      "Team Leading",
-                      "AI Solutions",
-                    ].map((t) => (
-                      <span
-                        key={t}
-                        className="bg-[#111] border border-white/10 px-3 py-1 rounded text-sm text-gray-300 hover:border-ln-neon transition"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
 
@@ -446,7 +517,7 @@ function App() {
             <h2 className="text-3xl font-display font-bold uppercase mb-8">
               ¿Hablamos?
             </h2>
-            <div className="flex justify-center gap-8 mb-12">
+            <div className="flex justify-center gap-8 mb-12 items-center">
               <a
                 href="https://github.com/gustavintavo8"
                 target="_blank"
@@ -468,6 +539,13 @@ function App() {
                 className="text-gray-400 hover:text-ln-neon transition text-2xl"
               >
                 <FiMail />
+              </a>
+              <a
+                href="/cv-gustavo-sobrado.pdf"
+                download
+                className="text-gray-400 hover:text-ln-neon transition text-sm font-mono"
+              >
+                CV.pdf
               </a>
             </div>
             <p className="text-gray-600 font-mono text-xs">
