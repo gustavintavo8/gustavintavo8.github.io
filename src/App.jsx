@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiGithub, FiArrowUpRight, FiCpu, FiMapPin, FiMail, FiGitBranch, FiUser, FiLayers, FiTerminal, FiDatabase, FiCode } from 'react-icons/fi';
-import { FaJava, FaPython, FaLinux, FaDocker, FaLinkedin, FaBrain } from 'react-icons/fa'; 
+import { FiGithub, FiArrowUpRight, FiMapPin, FiMail, FiGitBranch, FiLayers, FiTerminal, FiCode } from 'react-icons/fi';
+import { FaLinkedin, FaBrain } from 'react-icons/fa';
 import Lenis from '@studio-freight/lenis'
 
 // --- COMPONENTES AUXILIARES ---
@@ -14,7 +14,7 @@ const CustomCursor = () => {
     const mouseMove = (e) => setMousePosition({ x: e.clientX, y: e.clientY });
     window.addEventListener("mousemove", mouseMove);
     return () => window.removeEventListener("mousemove", mouseMove);
-  }, [prefersReducedMotion]);
+  }, []);
 
   if (prefersReducedMotion) return null;
 
@@ -58,7 +58,7 @@ const WelcomeScreen = ({ onEnter }) => {
 
         <button
           onClick={onEnter}
-          className="group relative px-8 py-4 bg-transparent border border-white/20 overflow-hidden rounded-full hover:border-ln-neon transition-colors duration-300 cursor-none"
+          className="group relative px-8 py-4 bg-transparent border border-white/20 overflow-hidden rounded-full hover:border-ln-neon transition-colors duration-300"
         >
           <div className="absolute inset-0 w-0 bg-ln-neon transition-all duration-[250ms] ease-out group-hover:w-full opacity-100"></div>
           <span className="relative flex items-center gap-2 text-white group-hover:text-black font-bold uppercase tracking-widest text-sm transition-colors">
@@ -75,31 +75,19 @@ const WelcomeScreen = ({ onEnter }) => {
 };
 
 // --- TARJETA DE PROYECTO ---
-const ProjectCard = ({ repo, index, isHighlight }) => {
+const ProjectCard = ({ repo, index }) => {
   return (
     <motion.a
       href={repo.html_url}
       target="_blank"
-      className={`group bg-[#0a0a0a] border border-white/10 p-8 rounded-xl hover:border-ln-neon/50 transition-all duration-300 flex flex-col h-full cursor-none relative overflow-hidden ${
-        isHighlight ? "md:col-span-2 bg-[#0f0f0f]" : ""
-      }`}
+      className="group bg-[#0a0a0a] border border-white/10 p-8 rounded-xl hover:border-ln-neon/50 transition-all duration-300 flex flex-col h-full relative overflow-hidden"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1 }}
     >
-      {isHighlight && (
-        <div className="absolute top-0 right-0 bg-ln-neon text-black text-xs font-bold px-3 py-1 rounded-bl-lg z-20">
-          DESTACADO
-        </div>
-      )}
-
       <div className="flex justify-between items-start mb-6">
-        <div
-          className={`p-3 rounded-lg ${
-            isHighlight ? "bg-ln-neon text-black" : "bg-white/5 text-ln-neon"
-          }`}
-        >
+        <div className="p-3 rounded-lg bg-white/5 text-ln-neon">
           {repo.icon || <FiGitBranch size={24} />}
         </div>
         <span className="text-xs font-mono text-gray-500 uppercase border border-white/10 px-2 py-1 rounded-full">
@@ -324,7 +312,7 @@ function App() {
                     {["Java (Advanced)", "Python", "C++", "SQL"].map((t) => (
                       <span
                         key={t}
-                        className="bg-[#111] border border-white/10 px-3 py-1 rounded text-sm text-gray-300 hover:border-ln-neon transition cursor-none"
+                        className="bg-[#111] border border-white/10 px-3 py-1 rounded text-sm text-gray-300 hover:border-ln-neon transition"
                       >
                         {t}
                       </span>
@@ -340,7 +328,7 @@ function App() {
                     {["Linux", "Docker", "Git", "Bash Scripting"].map((t) => (
                       <span
                         key={t}
-                        className="bg-[#111] border border-white/10 px-3 py-1 rounded text-sm text-gray-300 hover:border-ln-neon transition cursor-none"
+                        className="bg-[#111] border border-white/10 px-3 py-1 rounded text-sm text-gray-300 hover:border-ln-neon transition"
                       >
                         {t}
                       </span>
@@ -361,7 +349,7 @@ function App() {
                     ].map((t) => (
                       <span
                         key={t}
-                        className="bg-[#111] border border-white/10 px-3 py-1 rounded text-sm text-gray-300 hover:border-ln-neon transition cursor-none"
+                        className="bg-[#111] border border-white/10 px-3 py-1 rounded text-sm text-gray-300 hover:border-ln-neon transition"
                       >
                         {t}
                       </span>
@@ -394,7 +382,6 @@ function App() {
                       key={repo.id || i}
                       repo={repo}
                       index={i}
-                      isHighlight={false}
                     />
                   ))
                 ) : (
@@ -415,20 +402,20 @@ function App() {
               <a
                 href="https://github.com/gustavintavo8"
                 target="_blank"
-                className="text-gray-400 hover:text-ln-neon transition text-2xl cursor-none"
+                className="text-gray-400 hover:text-ln-neon transition text-2xl"
               >
                 <FiGithub />
               </a>
               <a
                 href="https://www.linkedin.com/in/gustavo-sobrado-aller-a296961a7/"
                 target="_blank"
-                className="text-gray-400 hover:text-ln-neon transition text-2xl cursor-none"
+                className="text-gray-400 hover:text-ln-neon transition text-2xl"
               >
                 <FaLinkedin />
               </a>
               <a
                 href="mailto:gustavintavo1202@gmail.com"
-                className="text-gray-400 hover:text-ln-neon transition text-2xl cursor-none"
+                className="text-gray-400 hover:text-ln-neon transition text-2xl"
               >
                 <FiMail />
               </a>
