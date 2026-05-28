@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiGithub, FiArrowUpRight, FiMapPin, FiMail, FiGitBranch, FiLayers, FiTerminal, FiCode } from 'react-icons/fi';
+import { FiGithub, FiArrowUpRight, FiMapPin, FiMail, FiLayers, FiTerminal, FiCode, FiExternalLink } from 'react-icons/fi';
 import { FaLinkedin, FaBrain } from 'react-icons/fa';
 import Lenis from '@studio-freight/lenis'
+import { projects } from './data/projects'
 
 // --- COMPONENTES AUXILIARES ---
 
@@ -75,45 +76,108 @@ const WelcomeScreen = ({ onEnter }) => {
 };
 
 // --- TARJETA DE PROYECTO ---
-const ProjectCard = ({ repo, index }) => {
+const ProjectCard = ({ project, index }) => {
+  const [imgError, setImgError] = useState(false);
+
   return (
-    <motion.a
-      href={repo.html_url}
-      target="_blank"
-      className="group bg-[#0a0a0a] border border-white/10 p-8 rounded-xl hover:border-ln-neon/50 transition-all duration-300 flex flex-col h-full relative overflow-hidden"
+    <motion.div
+      className="group bg-[#0a0a0a] border border-white/10 rounded-xl overflow-hidden flex flex-col hover:border-ln-neon/40 transition-all duration-300"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1 }}
     >
-      <div className="flex justify-between items-start mb-6">
-        <div className="p-3 rounded-lg bg-white/5 text-ln-neon">
-          {repo.icon || <FiGitBranch size={24} />}
-        </div>
-        <span className="text-xs font-mono text-gray-500 uppercase border border-white/10 px-2 py-1 rounded-full">
-          {repo.language || "Dev"}
+      {/* Cover image area */}
+      <div className="relative h-48 overflow-hidden flex-shrink-0">
+        {!imgError ? (
+          <img
+            src={project.cover}
+            alt={project.name}
+            className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+            onError={() => setImgError(true)}
+          />
+        ) : (
+          <div
+            className="w-full h-full flex items-center justify-center"
+            style={{ background: 'linear-gradient(135deg, #0a0a0a 0%, #111 50%, #0f0f0f 100%)' }}
+          >
+            <span className="text-ln-neon font-display font-bold text-3xl uppercase tracking-tight">
+              {project.name}
+            </span>
+          </div>
+        )}
+        {/* Dark overlay gradient */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-60" />
+        {/* Year badge */}
+        <span className="absolute top-3 right-3 text-[10px] font-mono text-ln-neon bg-black/70 border border-ln-neon/30 px-2 py-1 rounded-full backdrop-blur-sm">
+          {project.year}
         </span>
       </div>
 
-      <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-ln-neon transition-colors">
-        {repo.name}
-      </h3>
-      <p className="text-gray-400 text-sm leading-relaxed mb-8 flex-grow">
-        {repo.description}
-      </p>
+      {/* Content */}
+      <div className="flex flex-col flex-grow p-6 gap-4">
+        {/* Name + tagline */}
+        <div>
+          <h3 className="text-xl font-bold text-white mb-1 group-hover:text-ln-neon transition-colors">
+            {project.name}
+          </h3>
+          <p className="text-ln-neon text-xs font-mono opacity-80">{project.tagline}</p>
+        </div>
 
-      <div className="flex items-center gap-2 text-sm text-white font-medium group-hover:translate-x-1 transition-transform mt-auto">
-        {repo.html_url !== "#" ? "Ver en GitHub" : "Proyecto Privado"}{" "}
-        <FiArrowUpRight className="text-ln-neon" />
+        {/* Description */}
+        <p className="text-gray-400 text-sm leading-relaxed">
+          {project.description}
+        </p>
+
+        {/* Highlights (max 2) */}
+        <ul className="space-y-1">
+          {project.highlights.slice(0, 2).map((h, i) => (
+            <li key={i} className="flex items-start gap-2 text-xs text-gray-400">
+              <span className="text-ln-neon mt-0.5 flex-shrink-0">▸</span>
+              <span>{h}</span>
+            </li>
+          ))}
+        </ul>
+
+        {/* Stack chips */}
+        <div className="flex flex-wrap gap-1.5 mt-auto pt-2">
+          {project.stack.map((tech) => (
+            <span
+              key={tech}
+              className="bg-[#111] border border-white/10 px-2 py-1 rounded text-xs text-gray-300"
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
+
+        {/* Buttons */}
+        <div className="flex gap-3 pt-2 border-t border-white/5">
+          <a
+            href={project.demo}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded bg-ln-neon text-black text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors duration-200"
+          >
+            <FiExternalLink size={12} /> Ver demo
+          </a>
+          <a
+            href={project.repo}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded border border-white/20 text-gray-300 text-xs font-bold uppercase tracking-wider hover:border-ln-neon hover:text-ln-neon transition-colors duration-200"
+          >
+            <FiGithub size={12} /> Ver código
+          </a>
+        </div>
       </div>
-    </motion.a>
+    </motion.div>
   );
 };
 
 // --- APP PRINCIPAL ---
 function App() {
   const [entered, setEntered] = useState(false);
-  const [repos, setRepos] = useState([]);
   const [hasFinePointer] = useState(() => window.matchMedia('(pointer: fine)').matches);
 
   useEffect(() => {
@@ -125,34 +189,6 @@ function App() {
       }
       requestAnimationFrame(raf);
     }
-
-    fetch(
-      "https://api.github.com/users/gustavintavo8/repos?sort=updated&per_page=4"
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setRepos(data);
-      })
-      .catch(() => {
-        // Fallback si falla la API
-        setRepos([
-          {
-            id: 1,
-            name: "Data-Structures-CPP",
-            language: "C++",
-            description: "Implementación optimizada de Árboles AVL y Grafos.",
-            html_url: "https://github.com/gustavintavo8",
-          },
-          {
-            id: 2,
-            name: "Business-Intelligence",
-            language: "SQL",
-            description:
-              "Minería de datos y análisis para toma de decisiones (Matrícula de Honor).",
-            html_url: "https://github.com/gustavintavo8",
-          },
-        ]);
-      });
   }, [entered]);
 
   return (
@@ -367,6 +403,9 @@ function App() {
                     Proyectos <br />
                     Destacados
                   </h2>
+                  <p className="text-gray-500 font-mono text-sm mt-3">
+                    Proyectos reales en producción
+                  </p>
                 </div>
                 <div className="hidden md:block text-right">
                   <p className="text-gray-500 font-mono text-sm">
@@ -375,20 +414,25 @@ function App() {
                 </div>
               </div>
 
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
-                {repos.length > 0 ? (
-                  repos.map((repo, i) => (
-                    <ProjectCard
-                      key={repo.id || i}
-                      repo={repo}
-                      index={i}
-                    />
-                  ))
-                ) : (
-                  <div className="text-gray-500 font-mono">
-                    Cargando proyectos...
-                  </div>
-                )}
+              <div className="grid md:grid-cols-2 gap-6">
+                {projects.map((project, i) => (
+                  <ProjectCard
+                    key={project.slug}
+                    project={project}
+                    index={i}
+                  />
+                ))}
+              </div>
+
+              <div className="mt-10 text-center">
+                <a
+                  href="https://github.com/gustavintavo8"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-gray-400 hover:text-ln-neon transition-colors font-mono text-sm border border-white/10 hover:border-ln-neon/40 px-5 py-3 rounded-full"
+                >
+                  <FiGithub /> Más en GitHub <FiArrowUpRight />
+                </a>
               </div>
             </section>
           </div>
