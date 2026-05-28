@@ -20,7 +20,7 @@ Usamos ratings ELO. Cada usuario tiene un valor numérico que sube o baja según
 Antes del balanceo por ELO, hacemos un draft posicional. Cada jugador declara su posición preferida (portero, defensa, centrocampista, delantero). Los equipos deben tener al menos un portero cada uno.
 
 ```typescript
-function draftPositional(players: Player[]): [Player[], Player[]] {
+function draftPositional(players: Player[]): [Player[], Player[], Player[]] {
   const goalkeepers = players.filter(p => p.position === 'GK')
   const fieldPlayers = players.filter(p => p.position !== 'GK')
   
