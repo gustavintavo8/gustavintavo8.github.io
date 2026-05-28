@@ -131,8 +131,8 @@ const ProjectCard = ({ project, index }) => {
 
         {/* Highlights (max 2) */}
         <ul className="space-y-1">
-          {project.highlights.slice(0, 2).map((h, i) => (
-            <li key={i} className="flex items-start gap-2 text-xs text-gray-400">
+          {project.highlights.slice(0, 2).map((h) => (
+            <li key={h} className="flex items-start gap-2 text-xs text-gray-400">
               <span className="text-ln-neon mt-0.5 flex-shrink-0">▸</span>
               <span>{h}</span>
             </li>
@@ -181,14 +181,18 @@ function App() {
   const [hasFinePointer] = useState(() => window.matchMedia('(pointer: fine)').matches);
 
   useEffect(() => {
-    if (entered) {
-      const lenis = new Lenis();
-      function raf(time) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-      }
-      requestAnimationFrame(raf);
+    if (!entered) return;
+    const lenis = new Lenis();
+    let rafId;
+    function raf(time) {
+      lenis.raf(time);
+      rafId = requestAnimationFrame(raf);
     }
+    rafId = requestAnimationFrame(raf);
+    return () => {
+      cancelAnimationFrame(rafId);
+      lenis.destroy();
+    };
   }, [entered]);
 
   return (
@@ -446,6 +450,7 @@ function App() {
               <a
                 href="https://github.com/gustavintavo8"
                 target="_blank"
+                rel="noopener noreferrer"
                 className="text-gray-400 hover:text-ln-neon transition text-2xl"
               >
                 <FiGithub />
@@ -453,6 +458,7 @@ function App() {
               <a
                 href="https://www.linkedin.com/in/gustavo-sobrado-aller-a296961a7/"
                 target="_blank"
+                rel="noopener noreferrer"
                 className="text-gray-400 hover:text-ln-neon transition text-2xl"
               >
                 <FaLinkedin />

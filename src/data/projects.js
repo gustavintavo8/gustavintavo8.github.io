@@ -16,7 +16,6 @@ export const projects = [
     demo: "https://huggingface.co/spaces/gustavintavo8/legaldev",
     repo: "https://github.com/gustavintavo8/legaldev",
     cover: "/projects/legaldev-cover.svg",
-    featured: true,
   },
   {
     slug: "pachagas",
@@ -35,6 +34,5 @@ export const projects = [
     demo: "https://pachagas-app.vercel.app",
     repo: "https://github.com/gustavintavo8/PachagasApp",
     cover: "/projects/pachagas-banner.png",
-    featured: true,
   },
 ];
