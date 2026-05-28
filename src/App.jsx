@@ -1,13 +1,14 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import CustomCursor from './components/CustomCursor'
 import Layout from './components/Layout'
 import HeroSection from './sections/HeroSection'
 import Home from './pages/Home'
-import BlogIndex from './pages/BlogIndex'
-import BlogPost from './pages/BlogPost'
 import Lenis from '@studio-freight/lenis'
+
+const BlogIndex = lazy(() => import('./pages/BlogIndex'))
+const BlogPost = lazy(() => import('./pages/BlogPost'))
 
 function App() {
   const [entered, setEntered] = useState(false)
@@ -45,11 +46,13 @@ function App() {
 
         {entered && (
           <Layout>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/blog" element={<BlogIndex />} />
-              <Route path="/blog/:slug" element={<BlogPost />} />
-            </Routes>
+            <Suspense fallback={<div className="min-h-screen flex items-center justify-center text-gray-500 font-mono text-sm">Cargando...</div>}>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/blog" element={<BlogIndex />} />
+                <Route path="/blog/:slug" element={<BlogPost />} />
+              </Routes>
+            </Suspense>
           </Layout>
         )}
       </div>
