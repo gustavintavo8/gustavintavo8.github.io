@@ -1,4 +1,4 @@
-import matter from 'gray-matter'
+import yaml from 'js-yaml'
 
 const postFiles = import.meta.glob('/src/content/posts/*.md', {
   eager: true,
@@ -13,11 +13,21 @@ function parseDate(d) {
   return String(d)
 }
 
+// Parser de frontmatter compatible con navegador (gray-matter usa Buffer/fs de Node
+// y revienta en el cliente). js-yaml es JS puro.
+const FRONTMATTER_RE = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/
+
+function parseMarkdown(raw) {
+  const match = FRONTMATTER_RE.exec(raw)
+  if (!match) return { data: {}, content: raw }
+  return { data: yaml.load(match[1]) || {}, content: match[2] }
+}
+
 export function loadPosts() {
   if (_cachedPosts) return _cachedPosts
   _cachedPosts = Object.entries(postFiles)
     .map(([, raw]) => {
-      const { data, content } = matter(raw)
+      const { data, content } = parseMarkdown(raw)
       return {
         slug: data.slug,
         title: data.title,
