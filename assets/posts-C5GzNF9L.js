@@ -1,4 +1,4 @@
-import{a as getAugmentedNamespace,g as getDefaultExportFromCjs}from"./index-CscIm8xt.js";const __vite_glob_0_0=`---
+import{a as getAugmentedNamespace,g as getDefaultExportFromCjs}from"./index-DzYrt7jq.js";const __vite_glob_0_0=`---
 title: "Balancear equipos de fútbol con ELO en 3 fases"
 slug: "balanceo-equipos-elo"
 date: "2025-11-20"
