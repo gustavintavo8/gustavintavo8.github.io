@@ -11,8 +11,8 @@ body {
 }
 
 @media (pointer: fine) {
-  body {
-    cursor: none;
+  * {
+    cursor: url('/cursor.svg') 4 2, auto;
   }
 }
 

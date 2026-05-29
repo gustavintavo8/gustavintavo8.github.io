@@ -13,7 +13,7 @@ export const projects = [
       "Docker + Hugging Face Spaces · 69 tests / 84% cobertura · cold start <3s",
     ],
     stack: ["Python 3.11", "FastAPI", "ChromaDB", "LangChain", "Groq (Llama 4)", "Docker", "pytest"],
-    demo: "https://huggingface.co/spaces/gustavintavo8/legaldev",
+    demo: "https://legaldev-web.vercel.app/",
     repo: "https://github.com/gustavintavo8/legaldev",
     cover: "/projects/legaldev-cover.svg",
   },
