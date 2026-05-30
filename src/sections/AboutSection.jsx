@@ -11,7 +11,7 @@ export default function AboutSection() {
           <div className="absolute inset-0 border-2 border-ln-neon rounded-2xl transform translate-x-4 translate-y-4 transition-transform group-hover:translate-x-2 group-hover:translate-y-2"></div>
           <div className="absolute inset-0 bg-ln-gray rounded-2xl overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-500 shadow-2xl">
             <img
-              src="/tufoto.jpg"
+              src="/tufoto.png"
               alt="Gustavo Sobrado"
               className="w-full h-full object-cover object-center"
             />
