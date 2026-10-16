@@ -2,16 +2,22 @@ import { motion } from 'framer-motion'
 
 const timeline = [
   {
+    year: 'Jul. 2026 — actualidad',
+    title: 'Kirey España',
+    subtitle: 'Software Developer .NET · Proyecto Sportian · En remoto',
+    desc: 'Identidad digital de los fans: OAuth 2.0 / OpenID Connect, CIAM, Azure API Management y AKS. Microservicio .NET con 450+ tests unitarios y migración just-in-time de usuarios. En octubre de 2026, nombrado integrador de la plataforma de identidad.',
+  },
+  {
     year: '2026',
     title: 'LegalDev',
     subtitle: 'Proyecto personal · En producción',
-    desc: 'API RAG de normativa legal para developers. Python, FastAPI, ChromaDB, LangChain. 69 tests, 84% cobertura.',
+    desc: 'API RAG de normativa legal para developers. Python, FastAPI, ChromaDB, LangChain. CI con 290+ tests y 93% de cobertura.',
   },
   {
-    year: '2025',
+    year: '2026',
     title: 'PachagasApp',
     subtitle: 'Proyecto personal · En producción',
-    desc: 'Plataforma full-stack para organizar partidos de fútbol. 31 usuarios reales. Next.js, Supabase, Vercel AI SDK.',
+    desc: 'Plataforma full-stack para organizar partidos de fútbol. Unos 30 jugadores. Next.js, Supabase, Vercel AI SDK.',
   },
   {
     year: '2025',

@@ -31,12 +31,12 @@ export default function AboutSection() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-ln-neon opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-ln-neon"></span>
             </span>
-            Disponible para proyectos
+            Software Developer .NET en Kirey
           </div>
 
           <h2 className="text-5xl md:text-7xl font-display font-bold uppercase leading-[0.9] mb-6">
-            Ingeniero <br />
-            <span className="text-ln-neon">Full Stack & AI</span>
+            Backend <br />
+            <span className="text-ln-neon">.NET & AI</span>
           </h2>
 
           <div className="space-y-4 text-gray-400 text-lg leading-relaxed max-w-2xl border-l-2 border-white/10 pl-6">
@@ -61,12 +61,13 @@ export default function AboutSection() {
               de memoria en C hasta la arquitectura de microservicios.
             </p>
             <p>
-              Actualmente enfocado en{' '}
-              <strong>APIs con IA</strong>{' '}
-              (RAG, agentes, function calling) y aplicaciones{' '}
-              <strong>full-stack</strong> con Python y Next.js. Busco
-              proyectos donde la IA aporte valor real, no solo como
-              hype.
+              Trabajo como desarrollador backend .NET en{' '}
+              <strong>Kirey</strong>, en la identidad digital de los
+              fans del proyecto Sportian: OAuth 2.0 / OpenID Connect,
+              CIAM y Azure. Fuera del trabajo construyo{' '}
+              <strong>APIs con IA</strong> (RAG, function calling) y
+              aplicaciones <strong>full-stack</strong> con Python y
+              Next.js.
             </p>
           </div>
 

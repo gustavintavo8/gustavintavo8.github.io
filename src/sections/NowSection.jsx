@@ -14,9 +14,9 @@ export default function NowSection() {
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
         >
-          <p><strong className="text-white">Trabajando en:</strong> LegalDev, mi API RAG de normativa legal. Migrando a Hugging Face Spaces y mejorando la cobertura de tests.</p>
+          <p><strong className="text-white">Trabajando en:</strong> Kirey España, como desarrollador backend .NET en el proyecto Sportian: la identidad digital de los fans (OAuth 2.0 / OpenID Connect, CIAM) sobre Azure. En octubre de 2026, nombrado integrador de la plataforma de identidad.</p>
           <p><strong className="text-white">Aprendiendo:</strong> Arquitecturas de agentes con LangGraph. TypeScript avanzado. Optimización de consultas PostgreSQL.</p>
-          <p><strong className="text-white">Cursando:</strong> 4º de Ingeniería Informática en TI, Universidad de Oviedo. Trabajando el TFG.</p>
+          <p><strong className="text-white">Cursando:</strong> 4º de Ingeniería Informática en TI, Universidad de Oviedo (fin previsto: junio de 2027). Trabajando el TFG.</p>
         </motion.div>
         <motion.div
           className="space-y-4 text-gray-400 leading-relaxed border-l-2 border-white/10 pl-6"
@@ -25,7 +25,7 @@ export default function NowSection() {
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
         >
-          <p><strong className="text-white">Enfocado en:</strong> Backend con Python y FastAPI, sistemas con IA (RAG, function calling), y aplicaciones full-stack con Next.js.</p>
+          <p><strong className="text-white">Enfocado en:</strong> Backend con C# y .NET e identidad digital en el trabajo; Python, FastAPI y sistemas con IA (RAG, function calling) en mis proyectos.</p>
           <p><strong className="text-white">Idiomas:</strong> Español (nativo) · Inglés (B2)</p>
           <p><strong className="text-white">Ubicación:</strong> Mieres, Asturias, España</p>
         </motion.div>

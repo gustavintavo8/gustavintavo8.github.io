@@ -1,16 +1,21 @@
-import { FiCode, FiDatabase, FiLayers, FiTerminal } from 'react-icons/fi'
+import { FiCode, FiDatabase, FiKey, FiLayers, FiTerminal } from 'react-icons/fi'
 import { FaBrain } from 'react-icons/fa'
 
 const categories = [
   {
     icon: <FiCode className="text-ln-neon" />,
     title: 'Lenguajes',
-    items: ['Python 3.11', 'TypeScript', 'Java', 'SQL', 'C++'],
+    items: ['C#', 'Python 3.11', 'TypeScript', 'Java', 'SQL', 'C++'],
   },
   {
     icon: <FiDatabase className="text-ln-neon" />,
     title: 'Backend & Datos',
-    items: ['FastAPI', 'PostgreSQL', 'Supabase', 'ChromaDB', 'Docker'],
+    items: ['.NET', 'ASP.NET Core', 'FastAPI', 'PostgreSQL', 'Supabase', 'ChromaDB', 'Docker'],
+  },
+  {
+    icon: <FiKey className="text-ln-neon" />,
+    title: 'Identidad & Azure',
+    items: ['OAuth 2.0', 'OpenID Connect', 'JWT', 'Azure API Management', 'AKS', 'Application Insights'],
   },
   {
     icon: <FaBrain className="text-ln-neon" />,
@@ -25,7 +30,7 @@ const categories = [
   {
     icon: <FiTerminal className="text-ln-neon" />,
     title: 'DevOps & Testing',
-    items: ['Git', 'Docker', 'Playwright', 'pytest', 'Linux'],
+    items: ['Git', 'Docker', 'xUnit', 'Playwright', 'pytest', 'Linux'],
   },
 ]
 

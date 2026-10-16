@@ -3,8 +3,8 @@ import { Helmet } from 'react-helmet-async'
 export default function SEO({ title, description, url }) {
   const fullTitle = title
     ? `${title} — Gustavo Sobrado`
-    : 'Gustavo Sobrado — Ingeniero de Software · Backend & IA'
-  const desc = description || 'Portfolio de Gustavo Sobrado, ingeniero de software especializado en Backend, IA y sistemas full-stack.'
+    : 'Gustavo Sobrado — Backend Developer .NET · Identidad digital & IA'
+  const desc = description || 'Portfolio de Gustavo Sobrado Aller, desarrollador backend .NET en Kirey: identidad digital (OAuth 2.0 / OpenID Connect) y Azure. Proyectos con IA: LegalDev y PachagasApp.'
   const pageUrl = url || 'https://gustavintavo8.github.io/'
 
   return (
